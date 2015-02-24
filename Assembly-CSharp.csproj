@@ -46,15 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-     <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
-     <Compile Include="Assets\Scripts\LazerBlinking.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
- </Reference>
-=======
      <Compile Include="Assets\Scripts\CameraDetection.cs" />
      <Compile Include="Assets\Scripts\General.cs" />
+     <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
+     <Compile Include="Assets\Scripts\LazerBlinking.cs" />
      <Compile Include="Assets\Scripts\playerMovement.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
@@ -65,7 +60,6 @@
       <Project>{585714A5-2C13-0F52-FF63-753D747F2C1D}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{EE41A5F9-DF65-9E96-C21E-D5888C2CFDE6}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
->>>>>>> Stashed changes
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

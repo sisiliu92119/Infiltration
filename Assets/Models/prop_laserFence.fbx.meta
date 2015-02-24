@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: 32884c6a983964d87a636ccf37410f15
-=======
-guid: a86c26e2581ce9d40bc122d1bd086447
->>>>>>> Stashed changes
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -27,11 +23,7 @@ ModelImporter:
     9500000: //RootNode
   materials:
     importMaterials: 1
-<<<<<<< Updated upstream
     materialName: 0
-=======
-    materialName: 1
->>>>>>> Stashed changes
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -66,11 +58,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-<<<<<<< Updated upstream
   importAnimation: 1
-=======
-  importAnimation: 0
->>>>>>> Stashed changes
   copyAvatar: 0
   humanDescription:
     human: []
@@ -84,11 +72,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-<<<<<<< Updated upstream
   animationType: 2
   additionalBone: 0
-=======
-  animationType: 0
-  additionalBone: 1
->>>>>>> Stashed changes
   userData: 

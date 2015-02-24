@@ -4,14 +4,14 @@ using System.Collections;
 public class LaserPlayerDetection : MonoBehaviour
 {
 	private GameObject player;                          // Reference to the player.
-	private LastPlayerSighting lastPlayerSighting;      // Reference to the global last sighting of the player.
+	private General lastPlayerSighting;      // Reference to the global last sighting of the player.
 	
 	
 	void Awake ()
 	{
 		// Setting up references.
-		player = GameObject.FindGameObjectWithTag(Tags.player);
-		lastPlayerSighting = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<LastPlayerSighting>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		lastPlayerSighting = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
 	}
 	
 	
