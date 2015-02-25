@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\CameraDetection.cs" />
      <Compile Include="Assets\Scripts\General.cs" />
      <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
+     <Compile Include="Assets\Scripts\LaserSwitchDeactivation.cs" />
      <Compile Include="Assets\Scripts\LazerBlinking.cs" />
      <Compile Include="Assets\Scripts\playerMovement.cs" />
  <Reference Include="UnityEngine.UI">

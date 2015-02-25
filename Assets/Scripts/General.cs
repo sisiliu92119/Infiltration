@@ -25,10 +25,15 @@ public class General : MonoBehaviour {
 	void SwitchAlarms ()
 	{
 		
-		if(position != resetPosition && !siren.isPlaying)//if not playing siren and his position is not safe
-			siren.Play();
-		else if(position == resetPosition)//player's position is safe
+		if (position != resetPosition && !siren.isPlaying) 
+		{//if not playing siren and his position is not safe
+			siren.Play ();
+			Debug.Log("Alarm!!");
+		}
+		else if(position == resetPosition)
+		{//player's position is safe
 			siren.Stop();
+		}
 	}
 	
 	
