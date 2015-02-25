@@ -3,14 +3,14 @@ using System.Collections;
 
 public class CameraDetection : MonoBehaviour {
 
-	private GameObject player;								// The player gameObject.
+//	private GameObject player;								// The player gameObject.
 	private General lastPlayerSighting;		// The general type object.
 	int flag = 0;
 	public float timer =0;
 
 	void Awake ()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
+//		player = GameObject.FindGameObjectWithTag("Player");
 		lastPlayerSighting = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
 	}
 
@@ -28,20 +28,18 @@ public class CameraDetection : MonoBehaviour {
 	}
 	void OnTriggerStay (Collider other)
 	{
-
 		// If collides with player object
-		if(other.gameObject == player)
+		if(other.gameObject.tag == "Player")
 		{
 			// shoot a ray to see if the first intection object is player or not
-			Vector3 direction = player.transform.position - transform.position;
+			Vector3 direction = other.transform.position - transform.position;
 			RaycastHit hit;
 			if(Physics.Raycast(transform.position, direction, out hit))
 				// If the raycast hits the player.
-				if(hit.collider.gameObject == player){
+    			if(hit.collider.gameObject == other.gameObject){
 					// ... set the last global sighting of the player to the player's position.
 					//this triggers the alarm
-					lastPlayerSighting.position = player.transform.position;
-
+					lastPlayerSighting.position = other.transform.position;
 				}
 		}
 	}
@@ -49,7 +47,7 @@ public class CameraDetection : MonoBehaviour {
 
 
 	void OnTriggerExit(Collider other){
-		if (other.gameObject == player) {
+		if (other.gameObject.tag == "Player") {
 			//lastPlayerSighting.position = lastPlayerSighting.resetPosition;		
 			flag=1;
 		}

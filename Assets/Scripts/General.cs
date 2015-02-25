@@ -24,7 +24,6 @@ public class General : MonoBehaviour {
 	
 	void SwitchAlarms ()
 	{
-		
 		if (position != resetPosition && !siren.isPlaying) 
 		{//if not playing siren and his position is not safe
 			siren.Play ();
