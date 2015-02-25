@@ -5,15 +5,27 @@ public class CameraDetection : MonoBehaviour {
 
 	private GameObject player;								// The player gameObject.
 	private General lastPlayerSighting;		// The general type object.
-	
-	
+	int flag = 0;
+	public float timer =0;
+
 	void Awake ()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		lastPlayerSighting = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
 	}
 
+	void Update(){
+		if (flag == 1) {
+			timer+=Time.deltaTime;
+			if(timer>11){
+				lastPlayerSighting.position = lastPlayerSighting.resetPosition;
+				flag=0;
+				timer=0;
+			}
+		
+		}
 
+	}
 	void OnTriggerStay (Collider other)
 	{
 
@@ -38,11 +50,12 @@ public class CameraDetection : MonoBehaviour {
 
 	void OnTriggerExit(Collider other){
 		if (other.gameObject == player) {
-			lastPlayerSighting.position = lastPlayerSighting.resetPosition;		
-		
+			//lastPlayerSighting.position = lastPlayerSighting.resetPosition;		
+			flag=1;
 		}
 
 
 	}
+	
 
 }
