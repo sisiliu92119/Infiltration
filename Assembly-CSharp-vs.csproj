@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
      <Compile Include="Assets\Scripts\LaserSwitchDeactivation.cs" />
      <Compile Include="Assets\Scripts\LazerBlinking.cs" />
+     <Compile Include="Assets\Scripts\plantBomb.cs" />
      <Compile Include="Assets\Scripts\playerMovement.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>/Users/zwjshuang/Infiltration/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>

@@ -18,7 +18,7 @@ public class LaserPlayerDetection : MonoBehaviour
 	void Update(){
 		if (flag == 1) {
 			timer+=Time.deltaTime;
-			if(timer>8){
+			if(timer>11){
 				lastPlayerSighting.position = lastPlayerSighting.resetPosition;
 				flag=0;
 				timer=0;
