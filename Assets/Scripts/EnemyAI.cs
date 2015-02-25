@@ -8,12 +8,11 @@ public class EnemyAI : MonoBehaviour {
 	public float chaseWaitTime = 5f;						// The amount of time to wait when the last sighting is reached.
 	public float patrolWaitTime = 1f;						// The amount of time to wait when the patrol way point is reached.
 	public Transform[] patrolWayPoints;						// An array of transforms for the patrol route.
-	
+	public Transform targetPlayer;
 	
 	private EnemySight enemySight;						// Reference to the EnemySight script.
-	private NavMeshAgent nav;								// Reference to the nav mesh agent.
-	private Transform player;								// Reference to the player's transform.
-	private DonePlayerHealth playerHealth;					// Reference to the PlayerHealth script.
+	private NavMeshAgent nav;								// Reference to the nav mesh agent.								// Reference to the player's transform.
+//	private DonePlayerHealth playerHealth;					// Reference to the PlayerHealth script.
 	private General lastPlayerSighting;		// Reference to the last global sighting of the player.
 	private float chaseTimer;								// A timer for the chaseWaitTime.
 	private float patrolTimer;								// A timer for the patrolWaitTime.
@@ -25,27 +24,19 @@ public class EnemyAI : MonoBehaviour {
 		// Setting up the references.
 		enemySight = GetComponent<EnemySight>();
 		nav = GetComponent<NavMeshAgent>();
-		player = GameObject.FindGameObjectWithTag("Player").transform;
-		playerHealth = player.GetComponent<DonePlayerHealth>();
+		//player = GameObject.FindGameObjectWithTag("Player").transform;
+//		playerHealth = player.GetComponent<DonePlayerHealth>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
 	}
 	
 	
-	void Update ()
+	void FixedUpdate ()
 	{
-		// If the player is in sight and is alive...
-		if(enemySight.playerInSight && playerHealth.health > 0f)
-			// ... shoot.
+		if(enemySight.playerInSight )
 			Shooting();
-		
-		// If the player has been sighted and isn't dead...
-		else if(enemySight.personalLastSighting != lastPlayerSighting.resetPosition && playerHealth.health > 0f)
-			// ... chase.
+		else if(enemySight.personalLastSighting != lastPlayerSighting.resetPosition )
 			Chasing();
-		
-		// Otherwise...
 		else
-			// ... patrol.
 			Patrolling();
 	}
 	
@@ -54,6 +45,7 @@ public class EnemyAI : MonoBehaviour {
 	{
 		// Stop the enemy where it is.
 		nav.Stop();
+		//Debug.Log("Shooting?");
 	}
 	
 	

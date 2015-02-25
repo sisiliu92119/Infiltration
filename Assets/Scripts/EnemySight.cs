@@ -11,11 +11,11 @@ public class EnemySight : MonoBehaviour {
 	private NavMeshAgent nav;							// Reference to the NavMeshAgent component.
 	private SphereCollider col;							// Reference to the sphere collider trigger component.
 	private Animator anim;								// Reference to the Animator.
-	private General lastPlayerSighting;	// Reference to last global sighting of the player.
-	private GameObject player;							// Reference to the player.
+	private General gameController;	// Reference to last global sighting of the player.
+//	private GameObject player;							// Reference to the player.
 	private Animator playerAnim;						// Reference to the player's animator component.
 	private DonePlayerHealth playerHealth;				// Reference to the player's health script.
-	private DoneHashIDs hash;							// Reference to the HashIDs.
+	private HashIDs hash;							// Reference to the HashIDs.
 	private Vector3 previousSighting;					// Where the player was sighted last frame.
 	
 	
@@ -25,45 +25,51 @@ public class EnemySight : MonoBehaviour {
 		nav = GetComponent<NavMeshAgent>();
 		col = GetComponent<SphereCollider>();
 		anim = GetComponent<Animator>();
-		lastPlayerSighting = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
-		player = GameObject.FindGameObjectWithTag("Player");
-		playerAnim = player.GetComponent<Animator>();
-		playerHealth = player.GetComponent<DonePlayerHealth>();
-		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<DoneHashIDs>();
+		gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
+//		player = GameObject.FindGameObjectWithTag("Player");
+//		playerAnim = player.GetComponent<Animator>();
+		//playerHealth = player.GetComponent<DonePlayerHealth>();
+		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
 		
 		// Set the personal sighting and the previous sighting to the reset position.
-		personalLastSighting = lastPlayerSighting.resetPosition;
-		previousSighting = lastPlayerSighting.resetPosition;
+		personalLastSighting = gameController.resetPosition;
+		previousSighting = gameController.resetPosition;
 	}
 	
 	
-	void Update ()
+	void FixedUpdate ()
 	{
 		// If the last global sighting of the player has changed...
-		if(lastPlayerSighting.position != previousSighting)
+		if(gameController.position != previousSighting)
 			// ... then update the personal sighting to be the same as the global sighting.
-			personalLastSighting = lastPlayerSighting.position;
+			personalLastSighting = gameController.position;
 		
 		// Set the previous sighting to the be the sighting from this frame.
-		previousSighting = lastPlayerSighting.position;
+		previousSighting = gameController.position;
 		
 		// If the player is alive...
-		if(playerHealth.health > 0f)
+		//if(playerHealth.health > 0f)
 			// ... set the animator parameter to whether the player is in sight or not.
 			anim.SetBool(hash.playerInSightBool, playerInSight);
-		else
+		//else
 			// ... set the animator parameter to false.
-			anim.SetBool(hash.playerInSightBool, false);
+		//	anim.SetBool(hash.playerInSightBool, false);
 	}
 	
 	
 	void OnTriggerStay (Collider other)
 	{
 		// If the player has entered the trigger sphere...
-		if(other.gameObject == player)
+		if(other.gameObject.tag == "Player")
 		{
 			// By default the player is not in sight.
 			playerInSight = false;
+			EnemyAnimation localAnim = gameObject.GetComponent<EnemyAnimation>();
+			localAnim.targetPlayer = other.transform;
+			EnemyShooting localShoot = gameObject.GetComponent<EnemyShooting>();
+			localShoot.targetPlayer = other.transform;
+			EnemyAI localAI = gameObject.GetComponent<EnemyAI>();
+			localAI.targetPlayer = other.transform;
 			
 			// Create a vector from the enemy to the player and store the angle between it and forward.
 			Vector3 direction = other.transform.position - transform.position;
@@ -78,29 +84,29 @@ public class EnemySight : MonoBehaviour {
 				if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
 				{
 					// ... and if the raycast hits the player...
-					if(hit.collider.gameObject == player)
+					if(other.gameObject.tag == "Player")
 					{
 						// ... the player is in sight.
 						playerInSight = true;
 						
 						// Set the last global sighting is the players current position.
-						lastPlayerSighting.position = player.transform.position;
+						gameController.position = other.gameObject.transform.position;
 					}
 				}
 			}
 			
 			// Store the name hashes of the current states.
-			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
-			int playerLayerOneStateHash = playerAnim.GetCurrentAnimatorStateInfo(1).nameHash;
+//			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
+//			int playerLayerOneStateHash = playerAnim.GetCurrentAnimatorStateInfo(1).nameHash;
 			
 			// If the player is running or is attracting attention...
-			if(playerLayerZeroStateHash == hash.locomotionState || playerLayerOneStateHash == hash.shoutState)
-			{
+//			if(playerLayerZeroStateHash == hash.locomotionState || playerLayerOneStateHash == hash.shoutState)
+//			{
 				// ... and if the player is within hearing range...
-				if(CalculatePathLength(player.transform.position) <= col.radius)
+			if(CalculatePathLength(other.gameObject.transform.position) <= col.radius)
 					// ... set the last personal sighting of the player to the player's current position.
-					personalLastSighting = player.transform.position;
-			}
+					personalLastSighting = other.gameObject.transform.position;
+//			}
 		}
 	}
 	
@@ -108,7 +114,7 @@ public class EnemySight : MonoBehaviour {
 	void OnTriggerExit (Collider other)
 	{
 		// If the player leaves the trigger zone...
-		if(other.gameObject == player)
+		if(other.gameObject.tag == "Player")
 			// ... the player is not in sight.
 			playerInSight = false;
 	}
