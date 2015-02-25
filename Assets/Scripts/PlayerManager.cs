@@ -95,6 +95,13 @@ public class PlayerManager : MonoBehaviour {
 				if(anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.dyingState){
 					anim.SetBool(hash.deadBool, false);
 				}
+				else{
+					if(!isClone){
+						isClone = true;
+						resetPlayer();
+                        manager.clonePlayer();
+					}
+				}
 			}
 		}
 
