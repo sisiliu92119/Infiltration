@@ -46,20 +46,37 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AnimatorSetup.cs" />
      <Compile Include="Assets\Scripts\CameraDetection.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\Scripts\CameraManager.cs" />
      <Compile Include="Assets\Scripts\CloneBar.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\General.cs" />
      <Compile Include="Assets\Scripts\HashIDs.cs" />
      <Compile Include="Assets\Scripts\LaserManager.cs" />
+=======
+     <Compile Include="Assets\Scripts\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\EnemyAnimation.cs" />
+     <Compile Include="Assets\Scripts\EnemyShooting.cs" />
+     <Compile Include="Assets\Scripts\EnemySight.cs" />
+     <Compile Include="Assets\Scripts\General.cs" />
+     <Compile Include="Assets\Scripts\HashIDs.cs" />
+>>>>>>> Weijian_temp
      <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
      <Compile Include="Assets\Scripts\LaserSwitchDeactivation.cs" />
      <Compile Include="Assets\Scripts\LazerBlinking.cs" />
      <Compile Include="Assets\Scripts\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\playerMovement.cs" />
+     <Compile Include="Assets\temp_test\DoneAnimatorSetup.cs" />
+     <Compile Include="Assets\temp_test\DoneHashIDs.cs" />
+     <Compile Include="Assets\temp_test\DonePlayerHealth.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
+<<<<<<< HEAD
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+=======
+ <HintPath>/Users/liuhansi/GitHub/Infiltration/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+>>>>>>> Weijian_temp
  </Reference>
   </ItemGroup>
   <ItemGroup>
