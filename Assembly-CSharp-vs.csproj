@@ -46,11 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EnemyAI.cs" />
+     <Compile Include="Assets\EnemyAnimation.cs" />
+     <Compile Include="Assets\EnemyShooting.cs" />
+     <Compile Include="Assets\EnemySight.cs" />
      <Compile Include="Assets\Scripts\CameraDetection.cs" />
      <Compile Include="Assets\Scripts\General.cs" />
      <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
      <Compile Include="Assets\Scripts\LazerBlinking.cs" />
      <Compile Include="Assets\Scripts\playerMovement.cs" />
+     <Compile Include="Assets\temp_test\DoneAnimatorSetup.cs" />
+     <Compile Include="Assets\temp_test\DoneHashIDs.cs" />
+     <Compile Include="Assets\temp_test\DonePlayerHealth.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>/Users/zwjshuang/Infiltration/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
