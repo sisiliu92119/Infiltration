@@ -17,22 +17,32 @@ public class PlayerManager : MonoBehaviour {
 	private HashIDs hash;               // Reference to the HashIDs.
 	private GameManager manager;
 
+	private Renderer p_renderer;
+	public Material opaque;
+	public Material clear;
+
 	private List<UserInput> inputs;
 	private int inputIndex;
 	private Vector3 startPos;
 	private Quaternion startRot;
 	private Transform spawn;
 
+	private GameObject collidingBomb;
+	private GameObject holdingBomb;
+	private bool droppingBomb;
+	public float dropTimer;
+	public float dropTime = 3.0f;
+
 	[Serializable]
 	public class UserInput{
 		public float horizontalFloat;
 		public float verticalFloat;
-		public bool sneaking;
+		public bool usingBool;
 
 		public UserInput(float h, float v, bool s){
 			horizontalFloat = h;
 			verticalFloat = v;
-			sneaking = s;
+			usingBool = s;
 		}
 	}
 	
@@ -44,6 +54,8 @@ public class PlayerManager : MonoBehaviour {
 		manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 		inputs  = new List<UserInput>();
 		spawn = GameObject.FindGameObjectWithTag ("Spawn").transform;
+		p_renderer = transform.GetChild (0).renderer;
+		p_renderer.material = opaque;
 		startPos = spawn.position;
 		startRot = spawn.rotation;
 		resetPlayer ();
@@ -59,7 +71,6 @@ public class PlayerManager : MonoBehaviour {
 					inputIndex++;
 				}
 				else{ //end of clone life
-					//resetPlayer();
 					health = 0f;
 				}
 			}	
@@ -78,8 +89,16 @@ public class PlayerManager : MonoBehaviour {
 				else{
 					cloneTimer = cloneTimeMax;
 				}
-				
-				UserInput input = new UserInput(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), Input.GetButton("Sneak"));
+
+				Vector3 forward = transform.position - GameObject.Find("Main Camera").transform.position;
+				forward.y = 0;
+				forward = Vector3.Normalize(forward);
+				Vector3 right = Vector3.Normalize(Vector3.Cross(forward, Vector3.up));
+				forward = forward * Input.GetAxis("Vertical");
+				right = right * -1 * Input.GetAxis("Horizontal");
+				float verticalInput = forward.x + right.x;
+				float horizontalInput = forward.z + right.z;
+				UserInput input = new UserInput(verticalInput, horizontalInput, Input.GetButton("Use"));
 				inputs.Add (input);
 				MovementManagement(input);
 
@@ -89,6 +108,7 @@ public class PlayerManager : MonoBehaviour {
 		else{
 			if(!playerDead){
 				playerDead = true;
+				dropBomb();
 				anim.SetBool(hash.deadBool, playerDead);
 			}
 			else{
@@ -107,24 +127,71 @@ public class PlayerManager : MonoBehaviour {
 
 
 	}
-	
+
 	public void resetPlayer(){
 		health = 100f;
 		playerDead = false;
 		anim.SetBool(hash.deadBool, false);
 		anim.Play (hash.idleState, 0, 0);
+		anim.SetFloat(hash.speedFloat, 0);
+		p_renderer.enabled = true;
+		if(isClone){
+			Material[] matArray = new Material[5]{clear, clear, clear, clear, clear};
+			p_renderer.materials = matArray;
+		}
+		else{
+			p_renderer.material = opaque;
+		}
 		inputIndex = 0;
 		transform.position = startPos;
 		transform.rotation = startRot;
-		anim.SetFloat(hash.speedFloat, 0);
 		cloneTimer = cloneTimeMax;
+
+		dropBomb ();
+
+		collidingBomb = null;
+		holdingBomb = null;
+		droppingBomb = false;
+		dropTimer = 0;
 	}
 
 	void MovementManagement (UserInput input)
 	{
-		// Set the sneaking parameter to the sneak input.
-		anim.SetBool(hash.sneakingBool, input.sneaking);
-		
+		if(input.usingBool){
+			if(collidingBomb != null && holdingBomb == null) { //pick up bomb
+				holdingBomb = collidingBomb;
+				collidingBomb = null;
+				holdingBomb.collider.enabled = false;
+				holdingBomb.transform.parent = transform;
+				holdingBomb.transform.localPosition = new Vector3(0, 1.2f, -0.4f);
+				holdingBomb.transform.localRotation = Quaternion.identity;
+			}
+			else if(holdingBomb != null){
+				if(!droppingBomb){
+					droppingBomb = true;
+					dropTimer = dropTime;
+
+				}
+				else{
+					dropTimer -= Time.fixedDeltaTime;
+					if(dropTimer <= 0){ //Plant bomb
+						droppingBomb = false;
+						dropTimer = 0;
+						holdingBomb.renderer.material.color = Color.red;
+						holdingBomb.transform.localPosition = new Vector3(0, 0.25f, 0);
+						holdingBomb.transform.parent = null;
+						holdingBomb = null;			
+						manager.bombsPlanted++;
+						manager.checkWin();
+					}
+				}
+			}
+		}
+		else{
+			droppingBomb = false;
+			dropTimer = 0;
+		}
+
 		// If there is some axis input...
 		if(input.horizontalFloat != 0f || input.verticalFloat != 0f)
 		{
@@ -135,13 +202,24 @@ public class PlayerManager : MonoBehaviour {
 		else
 			// Otherwise set the speed parameter to 0.
 			anim.SetFloat(hash.speedFloat, 0);
+
+
 	}
-	
-	
+
+	public void dropBomb(){
+		if(holdingBomb != null){
+			holdingBomb.transform.localPosition = new Vector3(0, 0.25f, 0);
+			holdingBomb.collider.enabled = true;
+			holdingBomb.transform.parent = null;
+		}
+	}
+
 	void Rotating (float horizontal, float vertical)
 	{
 		// Create a new vector of the horizontal and vertical inputs.
 		Vector3 targetDirection = new Vector3(horizontal, 0f, vertical);
+//		Vector3 cameraDirection = transform.position - 
+//		Vector3 targetDirection
 		
 		// Create a rotation based on this new vector assuming that up is the global y axis.
 		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
@@ -170,8 +248,16 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 
-	void PlayerDead(){
+	void OnTriggerEnter(Collider other){
+		if(holdingBomb == null && other.gameObject.tag == "Bomb"){
+			collidingBomb = other.gameObject;
+		}
+	}
 
+	void OnTriggerExit(Collider other){
+		if(other.gameObject.tag == "Bomb"){
+			collidingBomb = null;
+		}
 	}
 
 	public void TakeDamage (float amount)

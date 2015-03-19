@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour {
 	public float patrolWaitTime = 1f;						// The amount of time to wait when the patrol way point is reached.
 	public Transform[] patrolWayPoints;						// An array of transforms for the patrol route.
 	public Transform targetPlayer;
+	float resetTime = 0f;
 	
 	private EnemySight enemySight;						// Reference to the EnemySight script.
 	private NavMeshAgent nav;								// Reference to the nav mesh agent.								// Reference to the player's transform.
@@ -17,8 +18,9 @@ public class EnemyAI : MonoBehaviour {
 	private float chaseTimer;								// A timer for the chaseWaitTime.
 	private float patrolTimer;								// A timer for the patrolWaitTime.
 	private int wayPointIndex;								// A counter for the way point array.
-	
-	
+	Vector3 startPos;
+	Quaternion startRot;
+
 	void Awake ()
 	{
 		// Setting up the references.
@@ -27,14 +29,26 @@ public class EnemyAI : MonoBehaviour {
 		//player = GameObject.FindGameObjectWithTag("Player").transform;
 //		playerHealth = player.GetComponent<DonePlayerHealth>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
+		startPos = transform.position;
+		startRot = transform.rotation;
 	}
 	
-	
+	public void reset(){
+		nav.enabled = false;
+		nav.velocity = Vector3.zero;
+		nav.angularSpeed = 0;
+		nav.speed = 0;
+		transform.position = startPos;
+		transform.rotation = startRot;
+		nav.enabled = true;
+		nav.destination = startPos;
+		
+	}
 	void FixedUpdate ()
 	{
 		if(enemySight.playerInSight )
 			Shooting();
-		else if(enemySight.personalLastSighting != lastPlayerSighting.resetPosition )
+		else if(enemySight.personalLastSighting != Vector3.zero)
 			Chasing();
 		else
 			Patrolling();
@@ -45,12 +59,11 @@ public class EnemyAI : MonoBehaviour {
 	{
 		// Stop the enemy where it is.
 		nav.Stop();
-		//Debug.Log("Shooting?");
 	}
 	
 	
 	void Chasing ()
-	{
+	{	
 		// Create a vector from the enemy to the last sighting of the player.
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 		
@@ -84,7 +97,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	
 	void Patrolling ()
-	{
+	{	
 		// Set an appropriate speed for the NavMeshAgent.
 		nav.speed = patrolSpeed;
 		

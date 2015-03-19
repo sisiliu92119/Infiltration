@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_2;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,30 +39,33 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Fx Explosion Pack\Script\DestroyEffect.cs" />
+     <Compile Include="Assets\Fx Explosion Pack\Script\csLightControl.cs" />
+     <Compile Include="Assets\Prefabs\Bomb\pieceControl.cs" />
+     <Compile Include="Assets\Prefabs\Bomb\shooting.cs" />
+     <Compile Include="Assets\Scripts\AlarmManager.cs" />
      <Compile Include="Assets\Scripts\AnimatorSetup.cs" />
+     <Compile Include="Assets\Scripts\BombBar.cs" />
+     <Compile Include="Assets\Scripts\BombController.cs" />
      <Compile Include="Assets\Scripts\CameraDetection.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\CameraManager.cs" />
      <Compile Include="Assets\Scripts\CloneBar.cs" />
-     <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\General.cs" />
-     <Compile Include="Assets\Scripts\HashIDs.cs" />
-     <Compile Include="Assets\Scripts\LaserManager.cs" />
-=======
      <Compile Include="Assets\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\EnemyAnimation.cs" />
      <Compile Include="Assets\Scripts\EnemyShooting.cs" />
      <Compile Include="Assets\Scripts\EnemySight.cs" />
+     <Compile Include="Assets\Scripts\FloorManager.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\General.cs" />
      <Compile Include="Assets\Scripts\HashIDs.cs" />
->>>>>>> Weijian_temp
+     <Compile Include="Assets\Scripts\LaserManager.cs" />
      <Compile Include="Assets\Scripts\LaserPlayerDetection.cs" />
      <Compile Include="Assets\Scripts\LaserSwitchDeactivation.cs" />
      <Compile Include="Assets\Scripts\LazerBlinking.cs" />
@@ -73,18 +76,10 @@
      <Compile Include="Assets\temp_test\DoneHashIDs.cs" />
      <Compile Include="Assets\temp_test\DonePlayerHealth.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
-<<<<<<< HEAD
- <HintPath>/Users/zwjshuang/Infiltration/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-=======
-<<<<<<< HEAD
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
-=======
- <HintPath>/Users/liuhansi/GitHub/Infiltration/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> Weijian_temp
->>>>>>> origin/master
  </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <Reference Include="Destruction">
+ <HintPath>Assets\Fracture - Box Destruction - Standard\Scripts\Destruction.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

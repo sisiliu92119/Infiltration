@@ -8,7 +8,7 @@ public class EnemyShooting : MonoBehaviour {
 	public AudioClip shotClip;							// An audio clip to play when a shot happens.
 	public float flashIntensity = 3f;					// The intensity of the light when the shot happens.
 	public float fadeSpeed = 10f;	
-	public Transform targetPlayer;// How fast the light will fade after the shot.
+	public GameObject targetPlayer;// How fast the light will fade after the shot.
 	
 	
 	private Animator anim;								// Reference to the animator.
@@ -69,9 +69,10 @@ public class EnemyShooting : MonoBehaviour {
 	{
 		// Cache the current value of the AimWeight curve.
 		float aimWeight = anim.GetFloat(hash.aimWeightFloat);
-		
+
+		if(targetPlayer)
 		// Set the IK position of the right hand to the player's centre.
-		anim.SetIKPosition(AvatarIKGoal.RightHand, targetPlayer.position + Vector3.up * 1.5f);
+		anim.SetIKPosition(AvatarIKGoal.RightHand, targetPlayer.transform.position + Vector3.up * 1.5f);
 		
 		// Set the weight of the IK compared to animation to that of the curve.
 		anim.SetIKPositionWeight(AvatarIKGoal.RightHand, aimWeight);
@@ -85,13 +86,14 @@ public class EnemyShooting : MonoBehaviour {
 		Debug.Log ("shot a face"); 
 		
 		// The fractional distance from the player, 1 is next to the player, 0 is the player is at the extent of the sphere collider.
-		float fractionalDistance = (col.radius - Vector3.Distance(transform.position, targetPlayer.position)) / col.radius;
+		float fractionalDistance = (col.radius - Vector3.Distance(transform.position, targetPlayer.transform.position)) / col.radius;
 		
 		// The damage is the scaled damage, scaled by the fractional distance, plus the minimum damage.
 		float damage = scaledDamage * fractionalDistance + minimumDamage;
 		
 		// The player takes damage.
 //		playerHealth.TakeDamage(damage);
+		targetPlayer.GetComponent<PlayerManager> ().TakeDamage (damage);
 		
 		// Display the shot effects.
 		ShotEffects();
@@ -104,7 +106,7 @@ public class EnemyShooting : MonoBehaviour {
 		laserShotLine.SetPosition(0, laserShotLine.transform.position);
 		
 		// Set the end position of the player's centre of mass.
-		laserShotLine.SetPosition(1, targetPlayer.position + Vector3.up * 1.5f);
+		laserShotLine.SetPosition(1, targetPlayer.transform.position + Vector3.up * 1.5f);
 		
 		// Turn on the line renderer.
 		laserShotLine.enabled = true;

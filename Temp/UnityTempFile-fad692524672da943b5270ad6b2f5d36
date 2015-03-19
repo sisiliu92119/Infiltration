@@ -1,0 +1,73 @@
+-debug
+-target:library
+-nowarn:0169
+-out:Temp/Assembly-CSharp.dll
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll"
+-r:Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
+-r:Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll
+-r:"Assets/Fracture - Box Destruction - Standard/Scripts/Destruction.dll"
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll"
+-define:UNITY_STANDALONE_OSX
+-define:ENABLE_MICROPHONE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_AUDIO_FMOD
+-define:UNITY_STANDALONE
+-define:ENABLE_MONO
+-define:ENABLE_SPRITES
+-define:ENABLE_TERRAIN
+-define:ENABLE_GENERICS
+-define:ENABLE_SUBSTANCE
+-define:INCLUDE_WP8SUPPORT
+-define:ENABLE_MOVIES
+-define:ENABLE_WWW
+-define:ENABLE_IMAGEEFFECTS
+-define:INCLUDE_METROSUPPORT
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_NETWORK
+-define:ENABLE_PHYSICS
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_2D_PHYSICS
+-define:ENABLE_GAMECENTER
+-define:ENABLE_SHADOWS
+-define:ENABLE_AUDIO
+-define:ENABLE_NAVMESH_CARVING
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:UNITY_4_3_2
+-define:UNITY_4_3
+-define:ENABLE_PROFILER
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_WIN
+-define:UNITY_TEAM_LICENSE
+"Assets/Fx Explosion Pack/Script/DestroyEffect.cs"
+"Assets/Fx Explosion Pack/Script/csLightControl.cs"
+Assets/Prefabs/Bomb/pieceControl.cs
+Assets/Prefabs/Bomb/shooting.cs
+Assets/Scripts/AlarmManager.cs
+Assets/Scripts/AnimatorSetup.cs
+Assets/Scripts/BombBar.cs
+Assets/Scripts/BombController.cs
+Assets/Scripts/CameraDetection.cs
+Assets/Scripts/CameraManager.cs
+Assets/Scripts/CloneBar.cs
+Assets/Scripts/EnemyAI.cs
+Assets/Scripts/EnemyAnimation.cs
+Assets/Scripts/EnemyShooting.cs
+Assets/Scripts/EnemySight.cs
+Assets/Scripts/FloorManager.cs
+Assets/Scripts/GameManager.cs
+Assets/Scripts/General.cs
+Assets/Scripts/HashIDs.cs
+Assets/Scripts/LaserManager.cs
+Assets/Scripts/LaserPlayerDetection.cs
+Assets/Scripts/LaserSwitchDeactivation.cs
+Assets/Scripts/LazerBlinking.cs
+Assets/Scripts/PlayerManager.cs
+Assets/Scripts/plantBomb.cs
+Assets/Scripts/playerMovement.cs
+Assets/temp_test/DoneAnimatorSetup.cs
+Assets/temp_test/DoneHashIDs.cs
+Assets/temp_test/DonePlayerHealth.cs
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Mono\lib/mono/unity\System.Runtime.Serialization.dll"
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Mono\lib/mono/unity\System.Xml.Linq.dll"

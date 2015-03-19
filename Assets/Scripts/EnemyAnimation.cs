@@ -38,7 +38,11 @@ public class EnemyAnimation : MonoBehaviour {
 		deadZone *= Mathf.Deg2Rad;
 	}
 	
-	
+	public void reset(){
+		anim.Play ("Locomotion", -1, 0f);
+		nav.velocity = Vector3.zero;
+	}
+
 	void FixedUpdate () 
 	{
 		// Calculate the parameters that need to be passed to the animator component.

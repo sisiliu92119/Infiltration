@@ -13,7 +13,9 @@ public class General : MonoBehaviour {
 		siren = this.audio;
 	}
 	
-	
+	public void reset(){
+		position = resetPosition;
+	}
 	
 	void Update ()
 	{

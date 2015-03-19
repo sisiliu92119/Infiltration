@@ -4,10 +4,10 @@ using System.Collections;
 public class LaserSwitchDeactivation : MonoBehaviour 
 {
 //	public GameObject laser;
-	private GameObject player;
+//	private GameObject player;
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
+//		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	void OnTriggerStay(Collider other)
 	{
