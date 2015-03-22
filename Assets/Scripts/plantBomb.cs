@@ -3,7 +3,7 @@ using System.Collections;
 
 
 public class plantBomb : MonoBehaviour {
-	private GameObject player;
+	//private GameObject player;
 	// Use this for initialization
 	private GameObject bomb;
 	int flag=0;
@@ -12,7 +12,7 @@ public class plantBomb : MonoBehaviour {
 	//float timer =0;
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
+		//player = GameObject.FindGameObjectWithTag("Player");
 		bomb = GameObject.FindGameObjectWithTag ("bomb");
 		bomb.renderer.enabled = false;
 	}
@@ -23,7 +23,7 @@ public class plantBomb : MonoBehaviour {
 	}
 	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject == player) 
+		if (other.gameObject.tag == "Player") 
 		{
 
 			flag=1;
@@ -31,14 +31,14 @@ public class plantBomb : MonoBehaviour {
 		}
 	}
 	void OnTriggerExit(Collider other){
-		if (other.gameObject == player) {
+		if (other.gameObject.tag == "Player") {
 			//lastPlayerSighting.position = lastPlayerSighting.resetPosition;		
 			flag=0;
 		}
 	}
 
 	void setupBomb(){
-
+		//Debug.Log ("sdfsdfsdf");
 		float timer=0;
 		if(Input.GetButtonDown("Switch"))
 		{
@@ -46,7 +46,7 @@ public class plantBomb : MonoBehaviour {
 		}
 		if(Input.GetButton("Switch"))
 		{
-			if (Time.time - timer >= 3)
+			if (Time.time - timer >= 5)
 			{
 				bomb.renderer.enabled=true;
 				win=true;

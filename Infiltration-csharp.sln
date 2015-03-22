@@ -23,7 +23,17 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																							GlobalSection(MonoDevelopProperties) = preSolution
+																																															GlobalSection(MonoDevelopProperties) = preSolution
+=======
+															GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+																						GlobalSection(MonoDevelopProperties) = preSolution
+=======
+																																																																			GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> Weijian_temp
+>>>>>>> origin/master
 =======
 								GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> origin/master
