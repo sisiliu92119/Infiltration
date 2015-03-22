@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour {
 		inputs  = new List<UserInput>();
 		spawn = GameObject.FindGameObjectWithTag ("Spawn").transform;
 		p_renderer = transform.GetChild (0).renderer;
-		p_renderer.material = opaque;
+		//p_renderer.material = opaque;
 		startPos = spawn.position;
 		startRot = spawn.rotation;
 		resetPlayer ();
@@ -146,7 +146,7 @@ public class PlayerManager : MonoBehaviour {
 			p_renderer.materials = matArray;
 		}
 		else{
-			p_renderer.material = opaque;
+			//p_renderer.material = opaque;
 		}
 		inputIndex = 0;
 		transform.position = startPos;
