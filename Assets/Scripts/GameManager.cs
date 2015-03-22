@@ -16,8 +16,9 @@ public class GameManager : MonoBehaviour {
 	public Texture2D textureToDisplay;
 	public FloorManager floors;
 	public GameObject[] bombs;
+	public GameObject[] walls;
 	float explodeTime = 3.0f;
-	float explodeTimer;
+	float explodeTimer = 3.0f;
 	int numExploded = 0;
 	bool explodingBombs = false;
     // Use this for initialization
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour {
 
 	void Update(){
 		if(explodingBombs){
+			Debug.Log ("EXPLODE TIMER: " + explodeTimer);
 			if(numExploded < bombs.Length){
 				if(explodeTimer <= 0){
 
@@ -74,7 +76,7 @@ public class GameManager : MonoBehaviour {
 		foreach(PlayerManager p in playerInstances){
 			p.resetPlayer();
 		}
-		currentPlayer = (GameObject)Instantiate (playerPrefab, new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+		currentPlayer = (GameObject)Instantiate (playerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
 		clonebar.setPlayer (currentPlayer);
 		bombbar.setPlayer (currentPlayer);
 		cam.setPlayer (currentPlayer.transform);
@@ -87,6 +89,14 @@ public class GameManager : MonoBehaviour {
 			lasers[i].GetComponent<LaserManager>().reset();
         }
 
+		//Reset lasers
+		GameObject[] buttons;
+		buttons = GameObject.FindGameObjectsWithTag("Button");
+		for (int i=0; i<buttons.Length; i++) 
+		{
+			buttons[i].GetComponent<ButtonController>().reset();
+		}
+
 		//Reset bombs
 		for (int i=0; i<bombs.Length; i++) 
 		{
@@ -97,7 +107,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void explodeBombs(){
-		float explodeTimer = explodeTime;
+		float explodeTimer = 3;
 		explodingBombs = true;
 	}
 

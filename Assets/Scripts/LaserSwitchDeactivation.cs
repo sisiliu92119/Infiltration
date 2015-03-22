@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LaserSwitchDeactivation : MonoBehaviour 
 {
-//	public GameObject laser;
+	public LaserManager[] lasers;
 //	private GameObject player;
 	void Awake()
 	{
@@ -22,11 +22,8 @@ public class LaserSwitchDeactivation : MonoBehaviour
 	void LaserDeactivation()
 	{
 		//Destroy (laser);
-		GameObject[] lasers;
-		lasers = GameObject.FindGameObjectsWithTag("Lazer");
-		for (int i=0; i<lasers.Length; i++) 
-		{
-			lasers[i].GetComponent<LaserManager>().TurnOff();
+		foreach(LaserManager l in lasers){
+			l.TurnOff();
 		}
 	}
 }

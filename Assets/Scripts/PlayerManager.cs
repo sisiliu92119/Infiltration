@@ -66,6 +66,12 @@ public class PlayerManager : MonoBehaviour {
 	{
 		if(health > 0f){
 			if(isClone){
+				if(inputIndex == 10){
+					transform.position = startPos;
+					transform.rotation = startRot;
+				}
+//				Debug.Log ("CLONE POSITION INDEX " + inputIndex + ": (" + (int)transform.position.x + "," + (int)transform.position.y + "," + (int)transform.position.z + ")");
+
 				if(inputIndex < inputs.Count){ //progresing through clone life
 					MovementManagement(inputs[inputIndex]);
 					inputIndex++;
@@ -82,8 +88,8 @@ public class PlayerManager : MonoBehaviour {
 					}
 					else{
 						isClone = true;
-						resetPlayer();
 						manager.clonePlayer();
+//						resetPlayer();
 					}
 				}
 				else{
@@ -118,8 +124,8 @@ public class PlayerManager : MonoBehaviour {
 				else{
 					if(!isClone){
 						isClone = true;
-						resetPlayer();
                         manager.clonePlayer();
+//						resetPlayer();
 					}
 				}
 			}
@@ -132,8 +138,8 @@ public class PlayerManager : MonoBehaviour {
 		health = 100f;
 		playerDead = false;
 		anim.SetBool(hash.deadBool, false);
-		anim.Play (hash.idleState, 0, 0);
 		anim.SetFloat(hash.speedFloat, 0);
+		anim.Play (hash.idleState, 0, 0);
 		p_renderer.enabled = true;
 		if(isClone){
 			Material[] matArray = new Material[5]{clear, clear, clear, clear, clear};
@@ -145,6 +151,7 @@ public class PlayerManager : MonoBehaviour {
 		inputIndex = 0;
 		transform.position = startPos;
 		transform.rotation = startRot;
+		
 		cloneTimer = cloneTimeMax;
 
 		dropBomb ();
@@ -153,6 +160,8 @@ public class PlayerManager : MonoBehaviour {
 		holdingBomb = null;
 		droppingBomb = false;
 		dropTimer = 0;
+//		Debug.Log ("RESET POSITION: (" + transform.position.x + "," + transform.position.y + "," + transform.position.z + ")");
+		
 	}
 
 	void MovementManagement (UserInput input)
@@ -197,7 +206,7 @@ public class PlayerManager : MonoBehaviour {
 		{
 			// ... set the players rotation and set the speed parameter to 5.5f.
 			Rotating(input.horizontalFloat, input.verticalFloat);
-			anim.SetFloat(hash.speedFloat, 5.5f, speedDampTime, Time.deltaTime);
+			anim.SetFloat(hash.speedFloat, 5.5f, 0, Time.deltaTime);
 		}
 		else
 			// Otherwise set the speed parameter to 0.

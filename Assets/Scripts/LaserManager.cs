@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LaserManager : MonoBehaviour {
 	public bool on = true;
-	public bool blink = true;
+	public bool blink;
 	public float onTime = 1.5f;
 	public float offTime = 1.5f;
 	private float timer;
@@ -49,7 +49,7 @@ public class LaserManager : MonoBehaviour {
 			if(other.gameObject.tag == "Player"){
 				// ... set the last global sighting of the player to the colliding object's position.
 //				lastPlayerSighting.position = other.transform.position;
-//				other.gameObject.GetComponent<PlayerManager>().health = 0;
+				other.gameObject.GetComponent<PlayerManager>().health = 0;
 
 			}
 		}

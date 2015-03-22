@@ -5,7 +5,7 @@ public class EnemyAI : MonoBehaviour {
 
 	public float patrolSpeed = 2f;							// The nav mesh agent's speed when patrolling.
 	public float chaseSpeed = 5f;							// The nav mesh agent's speed when chasing.
-	public float chaseWaitTime = 5f;						// The amount of time to wait when the last sighting is reached.
+	public float chaseWaitTime = 10f;						// The amount of time to wait when the last sighting is reached.
 	public float patrolWaitTime = 1f;						// The amount of time to wait when the patrol way point is reached.
 	public Transform[] patrolWayPoints;						// An array of transforms for the patrol route.
 	public Transform targetPlayer;
@@ -64,6 +64,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	void Chasing ()
 	{	
+//		Debug.Log ("Chase");
 		// Create a vector from the enemy to the last sighting of the player.
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 		
@@ -85,8 +86,8 @@ public class EnemyAI : MonoBehaviour {
 			if(chaseTimer >= chaseWaitTime)
 			{
 				// ... reset last global sighting, the last personal sighting and the timer.
-				lastPlayerSighting.position = lastPlayerSighting.resetPosition;
-				enemySight.personalLastSighting = lastPlayerSighting.resetPosition;
+//				lastPlayerSighting.position = lastPlayerSighting.resetPosition;
+				enemySight.personalLastSighting = Vector3.zero;
 				chaseTimer = 0f;
 			}
 		}
@@ -98,6 +99,8 @@ public class EnemyAI : MonoBehaviour {
 	
 	void Patrolling ()
 	{	
+//		Debug.Log ("Patrol");
+		
 		// Set an appropriate speed for the NavMeshAgent.
 		nav.speed = patrolSpeed;
 		

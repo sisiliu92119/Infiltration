@@ -26,11 +26,11 @@ public class FloorManager : MonoBehaviour {
 		ramp0mat.color = new Color (1, 1, 1, 1);
 		ramp1mat.color = new Color (1, 1, 1, 0);
 		floors [0] = transform.GetChild (0).gameObject;
-		floors [1] = transform.GetChild (2).gameObject;
-		floors [2] = transform.GetChild (1).gameObject;
+		floors [1] = transform.GetChild (1).gameObject;
+		floors [2] = transform.GetChild (2).gameObject;
 		floorPositions [0] = transform.GetChild (0).position;
-		floorPositions [1] = transform.GetChild (2).position;
-		floorPositions [2] = transform.GetChild (1).position;
+		floorPositions [1] = transform.GetChild (1).position;
+		floorPositions [2] = transform.GetChild (2).position;
 		showAllBool = false;
 		floorDist = floorPositions[1].y - floorPositions [0].y;
 
@@ -48,8 +48,10 @@ public class FloorManager : MonoBehaviour {
 				ramp1mat.color = new Color(1,1,1, 1 - (distToFloor1 / floorDist));
 				if(distToFloor1 > (floorDist / 2.0f)){
 					currentFloor = 0;
+//					Debug.Log("switch0");
 				}
 				else{
+//					Debug.Log("switch1");
 					currentFloor = 1;		
 				}
 			}
@@ -59,10 +61,10 @@ public class FloorManager : MonoBehaviour {
 				floor2mat.color = new Color(1,1,1, 1 - (distToFloor2 / floorDist));
                 ramp0mat.color = new Color(1,1,1, (distToFloor2 / floorDist));
 				if(distToFloor2 > (floorDist / 2.0f)){
-					currentFloor = 1;
+					currentFloor = 2;
 				}
 				else{
-                    currentFloor = 2;		
+                    currentFloor = 1;		
                 }
             }
             else{

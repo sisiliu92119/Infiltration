@@ -5,14 +5,15 @@ public class EnemySight : MonoBehaviour {
 	
 	public float fieldOfViewAngle = 110f;				// Number of degrees, centred on forward, for the enemy see.
 	public bool playerInSight;							// Whether or not the player is currently sighted.
-	public Vector3 personalLastSighting;				// Last place this enemy spotted the player.
-	private Vector3 previousSighting;					// Where the player was sighted last frame.
+	public Vector3 personalLastSighting;				// Last place this enemy spotted the player. 
+	public Vector3 previousSighting;					// Where the player was sighted last frame.//
 	
 	
 	private NavMeshAgent nav;							// Reference to the NavMeshAgent component.
 	private SphereCollider col;							// Reference to the sphere collider trigger component.
 	private Animator anim;								// Reference to the Animator.
 	private General gameController;	// Reference to last global sighting of the player.
+	private AlarmManager alarm;	// Reference to last global sighting of the player.
 	private GameObject targetPlayer;							// Reference to the player.
 
 	private Animator playerAnim;						// Reference to the player's animator component.
@@ -27,6 +28,7 @@ public class EnemySight : MonoBehaviour {
 		col = GetComponent<SphereCollider>();
 		anim = GetComponent<Animator>();
 		gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<General>();
+		alarm = GameObject.FindGameObjectWithTag("GameController").GetComponent<AlarmManager>();
 		targetPlayer = GameObject.FindGameObjectWithTag("Player");
 		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
 		
@@ -42,14 +44,16 @@ public class EnemySight : MonoBehaviour {
 	}
 	void FixedUpdate ()
 	{
-//		// If the last global sighting of the player has changed...
-//		if(gameController.position != previousSighting)
-//			// ... then update the personal sighting to be the same as the global sighting.
-//			personalLastSighting = gameController.position;
+		//Sets target if guard sees player
+		// If the last global sighting of the player has changed...
+//		if(personalLastSighting != previousSighting)
+			// ... then update the personal sighting to be the same as the global sighting.
+//			personalLastSighting = previousSighting;
 		//set personalLastSighting and previousSighting to alarm player position
 		
 		// Set the previous sighting to the be the sighting from this frame.
 //		previousSighting = gameController.position;
+//		previousSighting = personalLastSighting;
 		
 //		 If the player is alive...
 		if(targetPlayer && targetPlayer.GetComponent<PlayerManager>().health > 0f)
@@ -61,6 +65,7 @@ public class EnemySight : MonoBehaviour {
 	}
 	
 	public void setTarget(Vector3 targetPos){
+//		Debug.Log ("Setting target to: (" + targetPos.x + "," + targetPos.y + "," + targetPos.z + ")");
 		previousSighting = targetPos;
 		personalLastSighting = targetPos;
 	}
@@ -105,7 +110,9 @@ public class EnemySight : MonoBehaviour {
 						playerInSight = true;
 						
 						// Set the last global sighting is the players current position.
-						gameController.position = other.gameObject.transform.position;
+//						gameController.position = other.gameObject.transform.position;
+						alarm.soundAlarm();
+						setTarget(other.gameObject.transform.position);
 					}
 				}
 			}
